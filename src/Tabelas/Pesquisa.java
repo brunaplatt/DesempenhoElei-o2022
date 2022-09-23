@@ -1,20 +1,16 @@
 package Tabelas;
 
-import java.sql.Date;
-import java.sql.ResultSet;
-import java.time.LocalDate;
-
 public class Pesquisa {
 
     private int idPesquisa;
     private String institutopesquisa;
-    private LocalDate datapesquisa;
+    private String datapesquisa;
     private int mediaidade;
     private String uf;
     private String formatopesquisa;
     private String tipopesquisa;
 
-    public Pesquisa(int idPesquisa, String institutoPesquisa, LocalDate dataPesquisa, int mediaIdade, String uf, String formatoPesquisa, String tipoPesquisa) {
+    public Pesquisa(int idPesquisa, String institutoPesquisa, String dataPesquisa, int mediaIdade, String uf, String formatoPesquisa, String tipoPesquisa) {
         this.idPesquisa = idPesquisa;
         this.institutopesquisa = institutoPesquisa;
         this.datapesquisa = dataPesquisa;
@@ -43,11 +39,11 @@ public class Pesquisa {
 		this.institutopesquisa = institutopesquisa;
 	}
 
-	public LocalDate getDatapesquisa() {
+	public String getDatapesquisa() {
 		return datapesquisa;
 	}
 
-	public void setDatapesquisa(LocalDate datapesquisa) {
+	public void setDatapesquisa(String datapesquisa) {
 		this.datapesquisa = datapesquisa;
 	}
 
@@ -84,12 +80,7 @@ public class Pesquisa {
 	}
 
     public String toString() {
-    	return datapesquisa + " - " + institutopesquisa;
+    	return "Pesquisa " + this.idPesquisa + " - " + this.institutopesquisa + " - " + this.formatopesquisa + " - " + this.tipopesquisa;
     }
 
-	public void setDatapesquisa(ResultSet rs, Date valueOf) {
-				
-	}
-
-	
 }
