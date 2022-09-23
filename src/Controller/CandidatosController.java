@@ -7,26 +7,23 @@ import Tabelas.Candidato;
 
 public class CandidatosController {
 
-    public void salvar(Candidato candidatos) throws Exception {
-        if (candidatos.getNome() == null || candidatos.getNome().length() < 3) {
-            throw new Exception("Descrição Inválida");
+    public void salvar(Candidato candidato) throws Exception {
+        if (candidato.getNome() == null || candidato.getNome().length() < 3 || candidato.getPartido() == null) {
+            throw new Exception("Candidato e/ou Partido Inválidos!");
         }
-        CandidatoDao.getInstance().salvar(candidatos);
+        CandidatoDao.getInstance().salvar(candidato);
     }
 
-    public void atualizar(Candidato candidatos) throws Exception {
-
-        if (candidatos.getNome() == null || candidatos.getNome().length() < 3) {
-            throw new Exception("Nome inválido");
+    public void atualizar(Candidato candidato) throws Exception {
+        if (candidato.getNome() == null || candidato.getNome().length() < 3 || candidato.getPartido() == null) {
+            throw new Exception("Candidato e/ou Partido Inválidos!");
         }
-
-        CandidatoDao.getInstance().atualizar(candidatos);
+        CandidatoDao.getInstance().atualizar(candidato);
     }
 
     public  void excluir(int idcandidatos) throws Exception {
-
         if (idcandidatos == 0) {
-            throw new Exception();
+            throw new Exception("Nenhum candidato selecionado!");
         }
         CandidatoDao.getInstance().excluir(idcandidatos);
 
