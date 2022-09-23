@@ -5,10 +5,10 @@ public class CandidatoxPesquisa{
 
     private int idcandidatoxpesquisa;
     private int votos;
-    private String candidato;
-    private String pesquisa;
+    private Candidato candidato;
+    private Pesquisa pesquisa;
  
-    public CandidatoxPesquisa(int idcandidatoxpesquisa, int votos, String candidato, String pesquisa) {
+    public CandidatoxPesquisa(int idcandidatoxpesquisa, int votos, Candidato candidato, Pesquisa pesquisa) {
         this.idcandidatoxpesquisa = idcandidatoxpesquisa;
         this.votos = votos;
         this.candidato = candidato;
@@ -34,20 +34,24 @@ public class CandidatoxPesquisa{
         this.votos = votos;
     }
 
-    public String getCandidato() {
+    public Candidato getCandidato() {
         return candidato;
     }
 
-    public void setCandidato(String candidato) {
+    public void setCandidato(Candidato candidato) {
         this.candidato = candidato;
     }
 
-    public String getPesquisa() {
+    public Pesquisa getPesquisa() {
         return pesquisa;
     }
 
-    public void setPesquisa(String pesquisa) {
+    public void setPesquisa(Pesquisa pesquisa) {
         this.pesquisa = pesquisa;
+    }
+    
+    public String toString() {
+    	return "Candidato: " + this.candidato  + " - Pesquisa: " + this.pesquisa + " - Votos: " + this.votos;
     }
 
    
