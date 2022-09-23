@@ -7,8 +7,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 import Tabelas.Pesquisa;
 import util.ConnectionUtil;
@@ -16,7 +14,6 @@ import util.ConnectionUtil;
 public class PesquisaDao {
 
     private static PesquisaDao instance;
-    private List<Pesquisa> listaPesquisa = new ArrayList<>();
     private Connection con = ConnectionUtil.getConnection();
 
     public static PesquisaDao getInstance(){
@@ -28,15 +25,15 @@ public class PesquisaDao {
 
     public void salvar(Pesquisa pesquisa){
     	try {
-    		String sql = "insert into pesquisa (institutoPesquisa, datapesquisa, mediaidade, uf, formatopesquisa, tipopesquisa) values (?, ?, ?, ?, ?, ?)";
-    		
+    		String sql = "insert into pesquisa (idpesquisa, institutoPesquisa, datapesquisa, mediaidade, uf, formatopesquisa, tipopesquisa) values (?, ?, ?, ?, ?, ?, ?)";
     		PreparedStatement pstmt = con.prepareStatement(sql);
-    		pstmt.setString(1, pesquisa.getInstitutopesquisa());
-    		pstmt.setDate(2, java.sql.Date.valueOf(pesquisa.getDatapesquisa()));
-    		pstmt.setInt(3, pesquisa.getMediaidade());
-    		pstmt.setString(4, pesquisa.getUf());
-    		pstmt.setString(5, pesquisa.getFormatopesquisa());
-    		pstmt.setString(6, pesquisa.getTipopesquisa());
+    		pstmt.setInt(1, pesquisa.getIdPesquisa());
+    		pstmt.setString(2, pesquisa.getInstitutopesquisa());
+    		pstmt.setDate(3, java.sql.Date.valueOf(pesquisa.getDatapesquisa()));
+    		pstmt.setInt(4, pesquisa.getMediaidade());
+    		pstmt.setString(5, pesquisa.getUf());
+    		pstmt.setString(6, pesquisa.getFormatopesquisa());
+    		pstmt.setString(7, pesquisa.getTipopesquisa());
     		pstmt.execute();
     		
     	} catch (SQLException e) {
@@ -46,15 +43,15 @@ public class PesquisaDao {
 
     public void atualizar(Pesquisa pesquisa){
     	try {
-    		String sql = "update pesquisa set institutoPesquisa = ?, datapesquisa = ?, mediaidade = ?, uf = ?, formatopesquisa = ?, tipopesquisa = ? where id = ?";
+    		String sql = "update pesquisa set idPesquisa = ?, institutoPesquisa = ?, datapesquisa = ?, mediaidade = ?, uf = ?, formatopesquisa = ?, tipopesquisa = ? where id = ?";
     		PreparedStatement pstmt = con.prepareStatement(sql);
-    		pstmt.setString(1, pesquisa.getInstitutopesquisa());
-    		pstmt.setDate(2, java.sql.Date.valueOf(pesquisa.getDatapesquisa()));
-    		pstmt.setInt(3, pesquisa.getMediaidade());
-    		pstmt.setString(4, pesquisa.getUf());
-    		pstmt.setString(5, pesquisa.getFormatopesquisa());
-    		pstmt.setString(6, pesquisa.getTipopesquisa());
-    		pstmt.setInt(7, pesquisa.getIdPesquisa());
+    		pstmt.setInt(1, pesquisa.getIdPesquisa());
+    		pstmt.setString(2, pesquisa.getInstitutopesquisa());
+    		pstmt.setDate(3, java.sql.Date.valueOf(pesquisa.getDatapesquisa()));
+    		pstmt.setInt(4, pesquisa.getMediaidade());
+    		pstmt.setString(5, pesquisa.getUf());
+    		pstmt.setString(6, pesquisa.getFormatopesquisa());
+    		pstmt.setString(7, pesquisa.getTipopesquisa());
     		pstmt.execute();
     	} catch (SQLException e) {
     		e.printStackTrace();
@@ -82,7 +79,7 @@ public class PesquisaDao {
     			Pesquisa p = new Pesquisa();
     			p.setIdPesquisa(rs.getInt("ïdpesquisa"));
     			p.setInstitutopesquisa(rs.getString("institutopesquisa"));
-    			p.setDatapesquisa(rs,java.sql.Date.valueOf("datapesquisa"));
+    			p.setDatapesquisa(rs.getString("datapesquisa"));
     			p.setMediaidade(rs.getInt("mediaidade"));
     			p.setUf(rs.getString("uf"));
     			p.setFormatopesquisa(rs.getString("formatopesquisa"));
