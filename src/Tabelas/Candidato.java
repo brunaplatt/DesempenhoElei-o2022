@@ -1,10 +1,10 @@
 package Tabelas;
 
 public class Candidato {
+	
     private int idcandidatos;
     private String fichaLimpa;
     private String nome;
-	public static String getFichaLimpa;
     private String partido;
 
     public Candidato(int idcandidatos, String fichaLimpa, String nome, String partido) {
@@ -50,6 +50,6 @@ public class Candidato {
     }
 
     public String toString(){
-        return nome + " - " + partido;
+        return this.nome + " - " + this.partido;
     }
 }
