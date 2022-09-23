@@ -102,7 +102,7 @@ public class Votos extends JInternalFrame {
 				Pesquisa pesquisa = (Pesquisa) comVotosPesquisa.getSelectedItem();
 				CandidatoxPesquisa candidatoxpesquisa = new CandidatoxPesquisa();
 				candidatoxpesquisa.getVotos();
-				new CandidatoxPesquisaController().registrarVotos();
+				new CandidatoxPesquisaController().salvar();
 				JOptionPane.showMessageDialog(null, "Intenção de Votos Registrada");
 				dispose();				
 			}
@@ -177,28 +177,4 @@ public class Votos extends JInternalFrame {
 
 	}
 
-	public Object getIdCandidato() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Object getNome() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Object getPesquisa() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Object getVotos() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public void setNome(String string) {
-		// TODO Auto-generated method stub
-		
-	}
 }
