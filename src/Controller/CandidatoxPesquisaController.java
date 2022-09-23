@@ -1,26 +1,36 @@
 package Controller;
 
+import java.util.List;
+
 import DAO.CandidatoxPesquisaDao;
+import Tabelas.Candidato;
 import Tabelas.CandidatoxPesquisa;
+import Tabelas.Pesquisa;
 
 public class CandidatoxPesquisaController {
 
-    public void registrarVotos(CandidatoxPesquisa candidatopesquisa) throws Exception {
-        if(candidatopesquisa.getPesquisa() == null) {
-            throw new Exception("Pesquisa Inválida");
+    public void salvar(Pesquisa pesquisa, Candidato candidato, CandidatoxPesquisa candidatoxpesquisa) throws Exception {
+        if(candidatoxpesquisa.getCandidato() == null || candidatoxpesquisa.getPesquisa() == null || candidatoxpesquisa.getVotos() == 0) {
+            throw new Exception("Informação faltante, favor verificar!");
         }
-        if(candidatopesquisa.getCandidato() == null) {
-            throw new Exception("Candidato Inválido");
-        }
-        CandidatoxPesquisaDao.getInstance().registrarVotos(candidatopesquisa);
+        CandidatoxPesquisaDao.getInstance().salvar(pesquisa, candidato, candidatoxpesquisa);
     }
-
-	public void registrarVotos() {
-		
-		
+    
+    public void atualizar(CandidatoxPesquisa candidatoxpesquisa) throws Exception {
+    	  if(candidatoxpesquisa.getCandidato() == null || candidatoxpesquisa.getPesquisa() == null || candidatoxpesquisa.getVotos() == 0) {
+              throw new Exception("Informação faltante, favor verificar!");
+          }
+          CandidatoxPesquisaDao.getInstance().atualizar(candidatoxpesquisa);
 	}
 
-	public void salvar(CandidatoxPesquisa votos) {
+	public void excluir(int idcandidatoxpesquisa) throws Exception {
+		if(idcandidatoxpesquisa == 0) {
+			throw new Exception("Nenhuma informação selecionada.");
+		}
+		CandidatoxPesquisaDao.getInstance().excluir(idcandidatoxpesquisa);
+	}
+	public List<CandidatoxPesquisa> listar(){
+		return CandidatoxPesquisaDao.getInstance().listar();
 		
 		
 	}
