@@ -61,7 +61,7 @@ public class PrincipalUI extends JFrame {
 		JMenu jmPesquisa = new JMenu("Pesquisas");
 		jmPesquisa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Pesquisas pesquisa = new Pesquisas();
+				PesquisasUI pesquisa = new PesquisasUI();
 				pesquisa.setVisible(true);
 				contentPane.add(pesquisa, 0);
 			}
