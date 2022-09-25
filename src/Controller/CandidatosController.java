@@ -5,7 +5,7 @@ import java.util.List;
 import DAO.CandidatoDao;
 import Tabelas.Candidato;
 
-public class CandidatosController {
+public class CandidatoController {
 
     public void salvar(Candidato candidato) throws Exception {
         if (candidato.getNome() == null || candidato.getNome().length() < 3 || candidato.getPartido() == null) {
