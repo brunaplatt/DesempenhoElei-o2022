@@ -7,17 +7,19 @@ public class Pesquisa {
     private String datapesquisa;
     private int mediaidade;
     private String uf;
-    private String formatopesquisa;
+    private String formato;
     private String tipopesquisa;
+    private String tipo;
 
-    public Pesquisa(int idPesquisa, String institutoPesquisa, String dataPesquisa, int mediaIdade, String uf, String formatoPesquisa, String tipoPesquisa) {
+    public Pesquisa(int idPesquisa, String institutoPesquisa, String dataPesquisa, int mediaIdade, String uf, String formato, String tipoPesquisa, String tipo) {
         this.idPesquisa = idPesquisa;
         this.institutopesquisa = institutoPesquisa;
         this.datapesquisa = dataPesquisa;
         this.mediaidade = mediaIdade;
         this.uf = uf;
-        this.formatopesquisa = formatoPesquisa;
+        this.formato = formato;
         this.tipopesquisa = tipoPesquisa;
+        this.tipo = tipo;
     }
 
     public Pesquisa() {
@@ -63,12 +65,12 @@ public class Pesquisa {
 		this.uf = uf;
 	}
 
-	public String getFormatopesquisa() {
-		return formatopesquisa;
+	public String getFormato() {
+		return formato;
 	}
 
-	public void setFormatopesquisa(String formatopesquisa) {
-		this.formatopesquisa = formatopesquisa;
+	public void setFormato(String formato) {
+		this.formato = formato;
 	}
 
 	public String getTipopesquisa() {
@@ -78,9 +80,17 @@ public class Pesquisa {
 	public void setTipopesquisa(String tipopesquisa) {
 		this.tipopesquisa = tipopesquisa;
 	}
+	
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
 
     public String toString() {
-    	return "Pesquisa " + this.idPesquisa + " - " + this.institutopesquisa + " - " + this.formatopesquisa + " - " + this.tipopesquisa;
+    	return "Pesquisa " + this.idPesquisa + " - " + this.institutopesquisa + " - " + this.formato + " - " + this.tipopesquisa;
     }
 
 }
