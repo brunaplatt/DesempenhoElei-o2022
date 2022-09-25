@@ -8,7 +8,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
-import Controller.CandidatosController;
+import Controller.CandidatoController;
 import Tabelas.Candidato;
 
 import javax.swing.JLabel;
@@ -79,7 +79,7 @@ public class CadastrosUI extends JInternalFrame {
 						candidato.setNome(txtNomeCandidato.getText());
 						candidato.setPartido(txtPartidoCandidato.getText());
 						candidato.setFichaLimpa(txtFichaLimpaCandidato.getText());
-						new CandidatosController().atualizar(candidato);
+						new CandidatoController().atualizar(candidato);
 						JOptionPane.showMessageDialog(null, "Candidato atualizado com sucesso");
 					} else {
 						Candidato cadastros = new Candidato();
@@ -88,7 +88,7 @@ public class CadastrosUI extends JInternalFrame {
 						cadastros.setPartido(txtPartidoCandidato.getText());
 						cadastros.setFichaLimpa(txtFichaLimpaCandidato.getText());
 						
-						new CandidatosController().salvar(cadastros);
+						new CandidatoController().salvar(cadastros);
 						JOptionPane.showMessageDialog(null, "Candidato salvo com sucesso");
 					}
 					dispose();
