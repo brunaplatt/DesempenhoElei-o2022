@@ -11,7 +11,7 @@ import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.table.TableModel;
 
-import Controller.CandidatosController;
+import Controller.CandidatoController;
 import Tabelas.Candidato;
 import view.tables.CandidatoTableModel;
 
@@ -62,10 +62,10 @@ public class ConsultaCandidatosUI extends JInternalFrame {
 		JButton btnConsultaCandExcluir = new JButton("Excluir");
 		btnConsultaCandExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Candidato candidato = new CandidatoTableModel(new CandidatosController().listar()).get(jtCandidatos.getSelectedRow());
+				Candidato candidato = new CandidatoTableModel(new CandidatoController().listar()).get(jtCandidatos.getSelectedRow());
 				try { 
-					new CandidatosController().excluir(candidato.getIdcandidatos());
-					jtCandidatos.setModel(new CandidatoTableModel(new CandidatosController().listar()));
+					new CandidatoController().excluir(candidato.getIdcandidatos());
+					jtCandidatos.setModel(new CandidatoTableModel(new CandidatoController().listar()));
 				}catch (Exception e1) {
 					JOptionPane.showMessageDialog(null, "Erro ao excluir o candidato");
 				}
@@ -75,7 +75,7 @@ public class ConsultaCandidatosUI extends JInternalFrame {
 		JButton btnConsultaCandEditar = new JButton("Editar");
 		btnConsultaCandEditar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Candidato candidato = new CandidatoTableModel(new CandidatosController().listar()).get(jtCandidatos.getSelectedRow());
+				Candidato candidato = new CandidatoTableModel(new CandidatoController().listar()).get(jtCandidatos.getSelectedRow());
 				CadastrosUI cadcandidatoUI = new CadastrosUI();
 				cadcandidatoUI.setCandidatoUI(candidato);
 				cadcandidatoUI.setVisible(true);
@@ -88,7 +88,7 @@ public class ConsultaCandidatosUI extends JInternalFrame {
 		JButton btnAtualizar = new JButton("Atualizar Dados");
 		btnAtualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				jtCandidatos.setModel(new CandidatoTableModel(new CandidatosController().listar()));
+				jtCandidatos.setModel(new CandidatoTableModel(new CandidatoController().listar()));
 			}
 		});
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
@@ -125,7 +125,7 @@ public class ConsultaCandidatosUI extends JInternalFrame {
 		);
 		
 		jtCandidatos = new JTable();
-		jtCandidatos.setModel((TableModel) new CandidatoTableModel(new CandidatosController().listar()));
+		jtCandidatos.setModel((TableModel) new CandidatoTableModel(new CandidatoController().listar()));
 		scrCandidatos.setViewportView(jtCandidatos);
 		getContentPane().setLayout(groupLayout);
 
