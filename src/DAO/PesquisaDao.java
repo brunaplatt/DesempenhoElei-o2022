@@ -25,15 +25,16 @@ public class PesquisaDao {
 
     public void salvar(Pesquisa pesquisa){
     	try {
-    		String sql = "insert into pesquisa (idpesquisa, institutoPesquisa, datapesquisa, mediaidade, uf, formatopesquisa, tipopesquisa) values (?, ?, ?, ?, ?, ?, ?)";
+    		String sql = "insert into pesquisa (idpesquisa, institutoPesquisa, datapesquisa, mediaidade, uf, formato, tipopesquisa, tipo) values (?, ?, ?, ?, ?, ?, ?, ?)";
     		PreparedStatement pstmt = con.prepareStatement(sql);
     		pstmt.setInt(1, pesquisa.getIdPesquisa());
     		pstmt.setString(2, pesquisa.getInstitutopesquisa());
     		pstmt.setDate(3, java.sql.Date.valueOf(pesquisa.getDatapesquisa()));
     		pstmt.setInt(4, pesquisa.getMediaidade());
     		pstmt.setString(5, pesquisa.getUf());
-    		pstmt.setString(6, pesquisa.getFormatopesquisa());
+    		pstmt.setString(6, pesquisa.getFormato());
     		pstmt.setString(7, pesquisa.getTipopesquisa());
+    		pstmt.setString(8, pesquisa.getTipo());
     		pstmt.execute();
     		
     	} catch (SQLException e) {
@@ -43,15 +44,16 @@ public class PesquisaDao {
 
     public void atualizar(Pesquisa pesquisa){
     	try {
-    		String sql = "update pesquisa set idPesquisa = ?, institutoPesquisa = ?, datapesquisa = ?, mediaidade = ?, uf = ?, formatopesquisa = ?, tipopesquisa = ? where id = ?";
+    		String sql = "update pesquisa set idPesquisa = ?, institutoPesquisa = ?, datapesquisa = ?, mediaidade = ?, uf = ?, formato = ?, tipopesquisa = ?, tipo = ? where id = ?";
     		PreparedStatement pstmt = con.prepareStatement(sql);
     		pstmt.setInt(1, pesquisa.getIdPesquisa());
     		pstmt.setString(2, pesquisa.getInstitutopesquisa());
     		pstmt.setDate(3, java.sql.Date.valueOf(pesquisa.getDatapesquisa()));
     		pstmt.setInt(4, pesquisa.getMediaidade());
     		pstmt.setString(5, pesquisa.getUf());
-    		pstmt.setString(6, pesquisa.getFormatopesquisa());
+    		pstmt.setString(6, pesquisa.getFormato());
     		pstmt.setString(7, pesquisa.getTipopesquisa());
+    		pstmt.setString(8, pesquisa.getTipo());
     		pstmt.execute();
     	} catch (SQLException e) {
     		e.printStackTrace();
@@ -82,8 +84,9 @@ public class PesquisaDao {
     			p.setDatapesquisa(rs.getString("datapesquisa"));
     			p.setMediaidade(rs.getInt("mediaidade"));
     			p.setUf(rs.getString("uf"));
-    			p.setFormatopesquisa(rs.getString("formatopesquisa"));
+    			p.setFormato(rs.getString("formato"));
     			p.setTipopesquisa(rs.getString("tipopesquisa"));
+    			p.setTipo(rs.getString("tipo"));
     			listaPesquisa.add(p);
     		}
     	} catch (SQLException e) {
