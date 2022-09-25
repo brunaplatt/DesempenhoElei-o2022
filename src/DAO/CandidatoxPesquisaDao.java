@@ -14,6 +14,7 @@ import Tabelas.Pesquisa;
 import util.ConnectionUtil;
 
 public class CandidatoxPesquisaDao {
+	
     private static CandidatoxPesquisaDao instance;
     private Connection con = ConnectionUtil.getConnection();
     
@@ -26,37 +27,38 @@ public class CandidatoxPesquisaDao {
 
     public void salvar(Pesquisa pesquisa, Candidato candidato, CandidatoxPesquisa candidatoxpesquisa) {
         	try {
-        		String sqlCandidato = "insert into candidato (idcandidado, nome, partido, fichaLimpa) values (?, ?, ?, ?)";
+        		String sqlCandidato = "insert into candidato (idcandidados, nome, partido, fichaLimpa) values (?, ?, ?, ?)";
             	PreparedStatement pstmtCandidato = con.prepareStatement(sqlCandidato);
             	pstmtCandidato.setInt(1, candidato.getIdcandidatos());
             	pstmtCandidato.setString(2, candidato.getNome());
             	pstmtCandidato.setString(3, candidato.getPartido());
             	pstmtCandidato.setString(4, candidato.getFichaLimpa());
                         	
-            	String sqlPesquisa = "insert into pesquisa (institutoPesquisa, dataPesquisa, mediaIdade, uf, formatoPesquisa, tipoPesquisa) values (?, ?, ?, ?, ?, ?)";
+            	String sqlPesquisa = "insert into pesquisa (institutoPesquisa, dataPesquisa, mediaIdade, uf, formato, tipoPesquisa, tipo) values (?, ?, ?, ?, ?, ?, ?)";
             	PreparedStatement pstmtPesquisa = con.prepareStatement(sqlPesquisa, Statement.RETURN_GENERATED_KEYS);
             	pstmtPesquisa.setString(1, pesquisa.getInstitutopesquisa());
             	pstmtPesquisa.setString(2, pesquisa.getDatapesquisa());
             	pstmtPesquisa.setInt(3, pesquisa.getMediaidade());
             	pstmtPesquisa.setString(4, pesquisa.getUf());
-            	pstmtPesquisa.setString(5, pesquisa.getFormatopesquisa());
+            	pstmtPesquisa.setString(5, pesquisa.getFormato());
             	pstmtPesquisa.setString(6, pesquisa.getTipopesquisa());
+            	pstmtPesquisa.setString(7, pesquisa.getTipo());
             	
             	int keyP = pstmtPesquisa.executeUpdate();
             	
             	if (keyP > 0) {
             		ResultSet rsC = pstmtCandidato.getGeneratedKeys();
             		rsC.next();
-            		int idCandidato = rsC.getInt(1);
+            		int idCandidatos = rsC.getInt(1);
             		
             		ResultSet rsP = pstmtPesquisa.getGeneratedKeys();
             		rsP.next();
             		int idPesquisa = rsP.getInt(1);
             		
-            		String sql = "insert into CandidatoxPesquisa (votos, idCandidato, IdPesquisa) values (?, ?, ?)";
+            		String sql = "insert into CandidatoxPesquisa (votos, idCandidatos, IdPesquisa) values (?, ?, ?)";
             		PreparedStatement pstmt = con.prepareStatement(sql);
             		pstmt.setInt(1,  candidatoxpesquisa.getVotos());
-            		pstmt.setInt(2, idCandidato);
+            		pstmt.setInt(2, idCandidatos);
             		pstmt.setInt(3, idPesquisa);
             		pstmt.execute();
             	}
@@ -68,14 +70,13 @@ public class CandidatoxPesquisaDao {
 
     public void atualizar(CandidatoxPesquisa candidatoxpesquisa) {
     	try {
-    		String sql = "update candidatoxpesquisa set idcandidatoxpesquisa = ?, votos = ?, idCandidato = ?, idPesquisa = ? where id = ?";
+    		String sql = "update candidatoxpesquisa set idcandidatoxpesquisa = ?, votos = ?, idCandidatos = ?, idPesquisa = ? where id = ?";
     		PreparedStatement pstmt = con.prepareStatement(sql);
     		pstmt.setInt(1, candidatoxpesquisa.getIdcandidatoxpesquisa());
     		pstmt.setInt(2, candidatoxpesquisa.getVotos());
     		pstmt.setObject(3, candidatoxpesquisa.getCandidato());
     		pstmt.setObject(4, candidatoxpesquisa.getPesquisa());
-    		pstmt.setInt(5, candidatoxpesquisa.getIdcandidatoxpesquisa());
-    		
+    		    		
     	} catch (SQLException e) {
     		e.printStackTrace();
     	}
@@ -83,7 +84,7 @@ public class CandidatoxPesquisaDao {
     
     public void excluir(int idCandidatoxPesquisa) {
     	try {
-    		String sql = "delete from candidato_pesquisa where id = ?";
+    		String sql = "delete from candidatoxpesquisa where id = ?";
     		PreparedStatement pstmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
     		pstmt.setInt(1, idCandidatoxPesquisa);
     		pstmt.executeUpdate();
@@ -108,12 +109,12 @@ public class CandidatoxPesquisaDao {
     			
     			String sqlCandidato = "select * from candidato where id = ?";
     			PreparedStatement stmtCandidato = con.prepareStatement(sqlCandidato);
-    			stmtCandidato.setInt(1, rs.getInt("idCandidato"));
+    			stmtCandidato.setInt(1, rs.getInt("idCandidatos"));
     			ResultSet rsCandidato = stmtCandidato.executeQuery();
     			rsCandidato.next();
     			
     			Candidato c = new Candidato();
-    			c.setIdcandidatos(rsCandidato.getInt("idCandidato"));
+    			c.setIdcandidatos(rsCandidato.getInt("idCandidatos"));
     			c.setNome(rsCandidato.getString("Nome"));
     			c.setPartido(rsCandidato.getString("Partido"));
     			c.setFichaLimpa(rsCandidato.getString("FichaLimpa"));
@@ -131,7 +132,8 @@ public class CandidatoxPesquisaDao {
     			p.setMediaidade(rsPesquisa.getInt("MediaIdade"));
     			p.setUf(rsPesquisa.getString("Uf"));
     			p.setTipopesquisa(rsPesquisa.getString("TipoPesquisa"));
-    			p.setFormatopesquisa(rsPesquisa.getString("FormatoPesquisa"));
+    			p.setFormato(rsPesquisa.getString("Formato"));
+    			p.setFormato(rsPesquisa.getString("Tipo"));
     			
     			candidatoxpesquisa.setCandidato(c);
     			candidatoxpesquisa.setPesquisa(p);
