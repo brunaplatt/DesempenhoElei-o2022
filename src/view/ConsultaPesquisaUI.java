@@ -61,7 +61,7 @@ public class ConsultaPesquisaUI extends JInternalFrame {
 		btnConsultaPesqEditar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Pesquisa pesquisa = new PesquisaTableModel(new PesquisaController().listar()).get(jtPesquisa.getSelectedRow());
-				Pesquisas cadpesquisaUI = new Pesquisas();
+				PesquisasUI cadpesquisaUI = new PesquisasUI();
 				cadpesquisaUI.setPesquisaUI(pesquisa);
 				cadpesquisaUI.setVisible(true);
 				getParent().add(cadpesquisaUI, 0);
