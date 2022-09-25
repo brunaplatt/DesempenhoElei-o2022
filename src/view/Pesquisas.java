@@ -9,7 +9,6 @@ import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
 import Controller.PesquisaController;
-import Tabelas.Candidato;
 import Tabelas.Pesquisa;
 
 import javax.swing.JLabel;
@@ -18,20 +17,19 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.awt.event.ActionEvent;
 
 
-public class Pesquisas extends JInternalFrame {
+public class PesquisasUI extends JInternalFrame {
 	private static final long serialVersionUID = 1L;
 	private JTextField txtInstitutoPesquisa;
 	private JTextField txtDataPesquisa;
 	private JTextField txtMediaIdade;
 	private JTextField txtUfPesquisa;
-	private JTextField txtFormatoPesquisa;
+	private JTextField txtFormato;
 	private JTextField txtTipoPesquisa;
 	private Pesquisa pesquisa;
+	private JTextField txtTipo;
 
 	/**
 	 * Launch the application.
@@ -40,7 +38,7 @@ public class Pesquisas extends JInternalFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Pesquisas frame = new Pesquisas();
+					PesquisasUI frame = new PesquisasUI();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -52,12 +50,12 @@ public class Pesquisas extends JInternalFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Pesquisas() {
+	public PesquisasUI() {
 		setMaximizable(true);
 		setIconifiable(true);
 		setClosable(true);
 		setTitle("Pesquisas");
-		setBounds(100, 100, 778, 452);
+		setBounds(100, 100, 769, 378);
 		
 		JPanel jpPesquisas = new JPanel();
 		jpPesquisas.setBorder(new TitledBorder(null, "Pesquisas", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -74,13 +72,13 @@ public class Pesquisas extends JInternalFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Pesquisa pesquisa = new Pesquisa();
-					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
 					pesquisa.setInstitutopesquisa(txtInstitutoPesquisa.getText());
-					pesquisa.setDatapesquisa(LocalDate.parse(txtDataPesquisa.getText(), formatter));
+					pesquisa.setDatapesquisa(txtDataPesquisa.getText());
 					pesquisa.setUf(txtUfPesquisa.getText());
 					pesquisa.setTipopesquisa(txtTipoPesquisa.getText());
-					pesquisa.setFormatopesquisa(txtFormatoPesquisa.getText());
+					pesquisa.setFormato(txtFormato.getText());
 					pesquisa.setMediaidade(getX());
+					pesquisa.setTipo(txtTipo.getText());
 					
 					new PesquisaController().salvar(pesquisa);
 					JOptionPane.showMessageDialog(null, "Pesquisa salva com sucesso");
@@ -97,22 +95,24 @@ public class Pesquisas extends JInternalFrame {
 					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+							.addComponent(jpPesquisas, GroupLayout.DEFAULT_SIZE, 730, Short.MAX_VALUE)
+							.addGap(26))
+						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
 							.addComponent(btnSalvarPesquisa)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(btnCancelarPesquisa))
-						.addComponent(jpPesquisas, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 743, Short.MAX_VALUE))
-					.addGap(26))
+							.addGap(18)
+							.addComponent(btnCancelarPesquisa)
+							.addGap(23))))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(jpPesquisas, GroupLayout.PREFERRED_SIZE, 367, GroupLayout.PREFERRED_SIZE)
+					.addComponent(jpPesquisas, GroupLayout.PREFERRED_SIZE, 295, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnCancelarPesquisa)
-						.addComponent(btnSalvarPesquisa))
-					.addContainerGap(15, Short.MAX_VALUE))
+						.addComponent(btnSalvarPesquisa)
+						.addComponent(btnCancelarPesquisa))
+					.addContainerGap(91, Short.MAX_VALUE))
 		);
 		
 		JLabel lblnstitutoPesquisa = new JLabel("Instituto Pesquisa:");
@@ -139,21 +139,22 @@ public class Pesquisas extends JInternalFrame {
 		txtUfPesquisa = new JTextField();
 		txtUfPesquisa.setColumns(10);
 		
-		txtFormatoPesquisa = new JTextField();
-		txtFormatoPesquisa.setColumns(10);
+		txtFormato = new JTextField();
+		txtFormato.setColumns(10);
 		
 		txtTipoPesquisa = new JTextField();
 		txtTipoPesquisa.setColumns(10);
+		
+		JLabel lbTipo = new JLabel("Tipo: ");
+		
+		txtTipo = new JTextField();
+		txtTipo.setColumns(10);
 		GroupLayout gl_jpPesquisas = new GroupLayout(jpPesquisas);
 		gl_jpPesquisas.setHorizontalGroup(
 			gl_jpPesquisas.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_jpPesquisas.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_jpPesquisas.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_jpPesquisas.createSequentialGroup()
-							.addComponent(lbMediaIdadePesquisa, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(txtMediaIdade, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_jpPesquisas.createSequentialGroup()
 							.addComponent(lblnstitutoPesquisa, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
@@ -163,17 +164,25 @@ public class Pesquisas extends JInternalFrame {
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(txtDataPesquisa, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_jpPesquisas.createSequentialGroup()
-							.addComponent(lbTipoPesquisa, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(txtTipoPesquisa, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addComponent(lbFormatoPesquisa, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(txtFormato, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_jpPesquisas.createSequentialGroup()
+							.addComponent(lbMediaIdadePesquisa, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(txtMediaIdade, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_jpPesquisas.createSequentialGroup()
 							.addComponent(lbUfPesquisa, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(txtUfPesquisa, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_jpPesquisas.createSequentialGroup()
-							.addComponent(lbFormatoPesquisa, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE)
+							.addComponent(lbTipoPesquisa, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
+							.addGap(12)
+							.addComponent(txtTipoPesquisa, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_jpPesquisas.createSequentialGroup()
+							.addComponent(lbTipo, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(txtFormatoPesquisa, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+							.addComponent(txtTipo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		gl_jpPesquisas.setVerticalGroup(
@@ -183,27 +192,31 @@ public class Pesquisas extends JInternalFrame {
 					.addGroup(gl_jpPesquisas.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblnstitutoPesquisa, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
 						.addComponent(txtInstitutoPesquisa, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE))
-					.addGap(31)
+					.addGap(18)
 					.addGroup(gl_jpPesquisas.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lbDataPesquisa, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
 						.addComponent(txtDataPesquisa, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
-					.addGap(31)
+					.addGap(18)
 					.addGroup(gl_jpPesquisas.createParallelGroup(Alignment.BASELINE)
-						.addComponent(txtMediaIdade, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lbMediaIdadePesquisa))
-					.addGap(34)
+						.addComponent(lbMediaIdadePesquisa)
+						.addComponent(txtMediaIdade, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(18)
 					.addGroup(gl_jpPesquisas.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lbUfPesquisa)
 						.addComponent(txtUfPesquisa, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(33)
+					.addGap(18)
 					.addGroup(gl_jpPesquisas.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lbFormatoPesquisa, GroupLayout.PREFERRED_SIZE, 16, GroupLayout.PREFERRED_SIZE)
-						.addComponent(txtFormatoPesquisa, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(41)
+						.addComponent(txtFormato, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(18)
 					.addGroup(gl_jpPesquisas.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lbTipoPesquisa)
-						.addComponent(txtTipoPesquisa, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(63, Short.MAX_VALUE))
+						.addComponent(txtTipoPesquisa, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lbTipoPesquisa))
+					.addGap(18)
+					.addGroup(gl_jpPesquisas.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lbTipo)
+						.addComponent(txtTipo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(103, Short.MAX_VALUE))
 		);
 		jpPesquisas.setLayout(gl_jpPesquisas);
 		getContentPane().setLayout(groupLayout);
@@ -218,10 +231,12 @@ public class Pesquisas extends JInternalFrame {
 		if(pesquisa != null) {
 			txtDataPesquisa.setText(pesquisa.getDatapesquisa().toString());
 			txtInstitutoPesquisa.setText(pesquisa.getInstitutopesquisa());
-			txtFormatoPesquisa.setText(pesquisa.getFormatopesquisa());
+			txtFormato.setText(pesquisa.getFormato());
 			txtTipoPesquisa.setText(pesquisa.getTipopesquisa());
 			txtMediaIdade.setText(Integer.toString(pesquisa.getMediaidade()));
 			txtUfPesquisa.setText(pesquisa.getUf());
+			txtTipo.setText(pesquisa.getTipo());
+	
 		}
 	}
 }
